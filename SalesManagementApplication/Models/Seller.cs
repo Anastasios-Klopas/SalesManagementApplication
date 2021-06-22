@@ -27,17 +27,19 @@ namespace SalesManagementApplication.Models
         [NotMapped]
         public decimal Supply { get; set; }
         [NotMapped]
-        public IEnumerable<IGrouping<int,Sale>> SalesPerYearPerSeller { get; set; }
-        [NotMapped]
-        public IEnumerable<IEnumerable<IGrouping<int,Sale>>> SalesPerYearPerMonthSeller { get; set; }
+        public IEnumerable<IGrouping<int, Sale>> SalesPerYearPerSeller { get; set; }
+        //[NotMapped]
+        //public IDictionary<int,List<Sale>> SalesPerYearPerSeller { get; set; }
+        //[NotMapped]
+        //public IEnumerable<IEnumerable<IGrouping<int,Sale>>> SalesPerYearPerMonthSeller { get; set; }
         //[NotMapped]
         //public IEnumerable<IEnumerable<decimal>> SupplyPerSeller { get; set; }
         //[NotMapped]
         //public IEnumerable<IEnumerable<int>> CountSalesPerSeller { get; set; }
-        [NotMapped]
-        public IEnumerable<decimal> SupplyPerSeller { get; set; }
-        [NotMapped]
-        public IEnumerable<int> CountSalesPerSeller { get; set; }
+        //[NotMapped]
+        //public IEnumerable<decimal> SupplyPerSeller { get; set; }
+        //[NotMapped]
+        //public IEnumerable<int> CountSalesPerSeller { get; set; }
         [NotMapped]
         public Dictionary<int,string> MonthPerKey { get; set; }
     }

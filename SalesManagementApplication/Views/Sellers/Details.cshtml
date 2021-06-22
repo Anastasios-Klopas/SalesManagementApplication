@@ -22,33 +22,31 @@
     @{
         foreach (var year in Model.SalesPerYearPerSeller)
         {
+            <br />
+            <hr />
             <strong>Year : </strong>@year.Key;
             <hr />
-            foreach (var yearNew in Model.SalesPerYearPerMonthSeller)
+            foreach (var month in year.GroupBy(a => a.DateOfSale.Month))
             {
-
-                foreach (var month in yearNew)
+                <br />
+                <strong>Month : </strong>@Model.MonthPerKey[month.Key];
+                <br />
+                var sumSupply = 0m;
+                var quantitySales = 0;
+                foreach (var supply in month)
                 {
-                    <strong>Month : </strong>@Model.MonthPerKey[month.Key];
-                    <br />
-                    var sum = 0m;
-                    var count = 0;
-                    foreach (var supply in month)
-                    {
-                        sum = sum + supply.TransactionAmount * 0.1m;
-                        count++;
-                    }
-                    <strong>Supply : </strong>@sum;
-                    <br />
-                    <strong>Sales Count : </strong>@count;
-                    <br />
-                    <hr />
-
+                    sumSupply += supply.TransactionAmount * 0.1m;
+                    quantitySales++;
                 }
+                <strong>Supply : </strong>@sumSupply;
+                <br />
+                <strong>Sales Count : </strong>@quantitySales;
+                <br />
             }
         }
     }
 </div>
+<br />
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

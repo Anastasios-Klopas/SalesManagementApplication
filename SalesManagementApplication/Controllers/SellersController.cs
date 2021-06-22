@@ -37,28 +37,6 @@ namespace SalesManagementApplication.Controllers
             var groupSalesPerYear = seller.Sales.GroupBy(yearGroup => yearGroup.DateOfSale.Year);
             seller.SalesPerYearPerSeller = groupSalesPerYear;
 
-            //grouparisma ana mhna tou ka8e xronou gia ton ka8e pwlhth
-            var groupSalesPerMonthPerCurrentYear = groupSalesPerYear.Select(year => year.GroupBy(monthGroup => monthGroup.DateOfSale.Month));
-            seller.SalesPerYearPerMonthSeller = groupSalesPerMonthPerCurrentYear;
-
-            ////ola mazi ta panw 2 grouparismata
-            //var groupSalesPerMonthPerCurrentYear = seller.Sales.GroupBy(yearGroup => yearGroup.DateOfSale.Year).Select(year => year.GroupBy(monthGroup => monthGroup.DateOfSale.Month));
-
-            //ka8e mhna tou trexontos etous promh8eia tou ka8e pwlhth
-            var supplyNew = groupSalesPerMonthPerCurrentYear.Select(year => year.Select(month => month.Select(transAmount => transAmount.TransactionAmount).Sum() * 0.1m));
-            // seller.SupplyPerSeller = supplyNew;
-
-            //ka8e mhna tou trexontos etous sunolo pwlhsewn tou ka8e pwlhth
-            var countSupplyNew = groupSalesPerMonthPerCurrentYear.Select(year => year.Select(month => month.Select(transAmount => transAmount.TransactionAmount).Count()));
-            //seller.CountSalesPerSeller = countSupplyNew;
-
-            // grouparisma ana mhna ta Sales tou ka8e pwlhth
-            var groupSalesPerMonth = seller.Sales.GroupBy(month => month.DateOfSale.Month);
-            // ka8e mhna promh8eia tou ka8e pwlhth
-            seller.SupplyPerSeller = groupSalesPerMonth.Select(month => month.Select(transAmount => transAmount.TransactionAmount).Sum() * 0.1m);
-            // ka8e mhna pwlhseis tou ka8e pwlhth
-            seller.CountSalesPerSeller = groupSalesPerMonth.Select(month => month.Select(transAmount => transAmount.TransactionAmount).Count());
-           
             Dictionary<int, string> monthPerKey = new Dictionary<int, string>
             {
                 { 1, "January" },
@@ -75,6 +53,31 @@ namespace SalesManagementApplication.Controllers
                 { 12, "December" }
             };
             seller.MonthPerKey = monthPerKey;
+            //DOKIMES GROUPARISMATOS
+
+            //grouparisma ana mhna tou ka8e xronou gia ton ka8e pwlhth
+            //var groupSalesPerMonthPerCurrentYear = groupSalesPerYear.Select(year => year.GroupBy(monthGroup => monthGroup.DateOfSale.Month));
+            //seller.SalesPerYearPerMonthSeller = groupSalesPerMonthPerCurrentYear;
+
+            ////ola mazi ta panw 2 grouparismata
+            //var groupSalesPerMonthPerCurrentYear = seller.Sales.GroupBy(yearGroup => yearGroup.DateOfSale.Year).Select(year => year.GroupBy(monthGroup => monthGroup.DateOfSale.Month));
+
+            //ka8e mhna tou trexontos etous promh8eia tou ka8e pwlhth
+            //    var supplyNew = groupSalesPerMonthPerCurrentYear.Select(year => year.Select(month => month.Select(transAmount => transAmount.TransactionAmount).Sum() * 0.1m));
+            // seller.SupplyPerSeller = supplyNew;
+
+            //ka8e mhna tou trexontos etous sunolo pwlhsewn tou ka8e pwlhth
+            //   var countSupplyNew = groupSalesPerMonthPerCurrentYear.Select(year => year.Select(month => month.Select(transAmount => transAmount.TransactionAmount).Count()));
+            //seller.CountSalesPerSeller = countSupplyNew;
+
+            // grouparisma ana mhna ta Sales tou ka8e pwlhth
+            // var groupSalesPerMonth = seller.Sales.GroupBy(month => month.DateOfSale.Month);
+            // ka8e mhna promh8eia tou ka8e pwlhth
+            //seller.SupplyPerSeller = groupSalesPerMonth.Select(month => month.Select(transAmount => transAmount.TransactionAmount).Sum() * 0.1m);
+            // ka8e mhna pwlhseis tou ka8e pwlhth
+            //seller.CountSalesPerSeller = groupSalesPerMonth.Select(month => month.Select(transAmount => transAmount.TransactionAmount).Count());
+
+
             if (seller == null)
             {
                 return HttpNotFound();
